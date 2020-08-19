@@ -1,0 +1,24 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: #16352d;
+}
+
+.button {
+    background: #2d1635;
+    padding: 10px;
+    margin: auto;
+    width: 15em;
+}
+
+.button-text {
+    color: #c8c5c9;
+    text-align: center;
+}
