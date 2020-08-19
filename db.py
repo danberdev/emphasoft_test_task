@@ -4,6 +4,7 @@ class DB:
     def __init__(self, db_name):
         self.connection = sqlite3.connect(db_name)
         self.cursor = self.get_cursor()
+        create_db()
 
     def get_cursor(self):
         return self.connection.cursor()
@@ -12,7 +13,7 @@ class DB:
         self.connection.close()
 
     def create_db(self):
-        self.cursor.execute("CREATE TABLE names\
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS names\
                       (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, expires_in )")
         self.connection.commit()
 

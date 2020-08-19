@@ -31,7 +31,7 @@ def get_and_store_token():
         payload = {'client_id': config.client_id,
                    'client_secret': config.client_secret,
                    'redirect_uri': config.redirect_uri,
-                   'code': request.form['code']}
+                   'code': request.args.get('code')}
         r = requests.get('https://oauth.vk.com/access_token', params=payload)
         res = r.json()
 
