@@ -6,7 +6,7 @@
 import sqlite3
 
 from flask import Flask
-from flask import render_template
+from flask import render_template, make_response, redirect
 from flask import request
 
 import requests
@@ -36,12 +36,12 @@ def get_and_store_token():
         res = r.json()
 
         if "access_token" in res:
-            last_id = database.insert_record(res["access_token"], res["expires_in"])
+            last_id = database.insert_record(res["access_token"], int(res["expires_in"]))
         else:
             return "Ошибка! Вернитесь назад и попробуйте ещё раз."
 
         response = make_response(redirect('/'))
-        response.set_cookie('session_id', last_id)
+        response.set_cookie('session_id', str(last_id))
         return response
 
     else:

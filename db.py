@@ -14,13 +14,13 @@ class DB:
 
     def create_db(self):
         self.cursor.execute("CREATE TABLE IF NOT EXISTS users\
-                      (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT, expires_in INTEGER)")
+                      (key TEXT, expires_in INTEGER)")
         self.connection.commit()
 
     def insert_record(self, key, expire_in):
-        self.cursor.execute("INSERT INTO users VALUES (?, ?)", key, expire_in)
+        self.cursor.execute("INSERT INTO users VALUES (?, ?)", (key, expire_in))
         self.connection.commit()
-        return self.cursor.lastrowid()
+        return self.cursor.lastrowid
 
     def get_record_by_id(self, id_number):
         return self.cursor.execute("SELECT * FROM users WHERE id=?", id_number)
