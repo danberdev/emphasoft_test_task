@@ -7,12 +7,13 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     height: 100%;
-    background: #16352d;
+    color: #16352d;
 }
 
 .button {
-    background: #2d1635;
+    color: #2d1635;
     padding: 10px;
     margin: auto;
     width: 15em;
@@ -24,16 +25,20 @@ html, body {
 }
 
 .user {
-    display: flex;
-    align-items: center;
     padding: 10px;
-    max-width: 70px;
+    max-width: 220px;
+    background:
 }
 
 .avatar {
-    border-radius: 25px;
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
 }
 
 .name {
+    padding: 10px;
     font-weight: bold;
+    display: block;
+    text-align: center;
 }

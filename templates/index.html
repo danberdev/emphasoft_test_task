@@ -3,6 +3,7 @@
 <head>
   <title>Тестовое создание — страничка авторизации</title>
   <link rel="stylesheet" href="static/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -10,7 +11,7 @@
     {% if session_id %}
     {% for user in users %}
     <div class="user">
-      <img class="avatar" href="{{user.photo_50}}">
+      <img class="avatar" src="{{user.photo_200_orig}}">
       <span class="name"> {{user.first_name}} {{user.last_name}} </span>
     </div>
     {% endfor %}

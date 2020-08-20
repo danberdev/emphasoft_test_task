@@ -23,13 +23,12 @@ def main_page():
         key = database.get_record_by_id(session_id)
         payload = {'access_token': key[0],
                    'order': 'random',
-                   'fields': 'photo_50',
+                   'fields': 'photo_200_orig',
                    'count': 5,
                    'v': 5.122}
         response = requests.get('https://api.vk.com/method/friends.get',
                                 params=payload)
         res = response.json()
-#        return response.json()
         return render_template('index.html', session_id=session_id, users=res["response"]["items"])
     else:
         return render_template('index.html', session_id=session_id)
@@ -37,7 +36,7 @@ def main_page():
 
 @app.route('/callback', methods=['GET'])
 def get_and_store_token():
-    error=None
+    error = None
     if request.method == 'GET':
         payload = {'client_id': config.client_id,
                    'client_secret': config.client_secret,
@@ -47,7 +46,8 @@ def get_and_store_token():
         res = r.json()
 
         if "access_token" in res:
-            last_id = database.insert_record(res["access_token"], int(res["expires_in"]))
+            last_id = database.insert_record(
+                res["access_token"], int(res["expires_in"]))
         else:
             return "Ошибка! Вернитесь назад и попробуйте ещё раз."
 
