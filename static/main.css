@@ -22,3 +22,18 @@ html, body {
     color: #c8c5c9;
     text-align: center;
 }
+
+.user {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    max-width: 70px;
+}
+
+.avatar {
+    border-radius: 25px;
+}
+
+.name {
+    font-weight: bold;
+}

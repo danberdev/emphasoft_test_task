@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class DB:
     def __init__(self, db_name):
         self.connection = sqlite3.connect(db_name)
@@ -18,9 +19,11 @@ class DB:
         self.connection.commit()
 
     def insert_record(self, key, expire_in):
-        self.cursor.execute("INSERT INTO users VALUES (?, ?)", (key, expire_in))
+        self.cursor.execute(
+            "INSERT INTO users VALUES (?, ?)", (key, expire_in))
         self.connection.commit()
         return self.cursor.lastrowid
 
     def get_record_by_id(self, id_number):
-        return self.cursor.execute("SELECT * FROM users WHERE id=?", id_number)
+        self.cursor.execute("SELECT * FROM users WHERE rowid=?", (id_number, ))
+        return self.cursor.fetchone()

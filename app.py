@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-#Сделать веб приложение, на выбранном вами языке, при открытии должно показать кнопку «авторизоваться» по нажатию делает oauth авторизацию ВКонтакте, и показывает имя авторизованного пользователя и 5 любых друзей пользователя. При последующих запусках/заходах на страницу сразу показывает всю информацию т.к. уже понимает, что авторизовано и авторизация запоминается. Бекенд если потребуется, на любой технологии на ваш выбор.
-#Результат предоставить в качестве url (или приложения, которое можно установить на мобильное устройство) где можно протестировать работу и в виде исходных кодов в tar.gz архиве на телеграмм @Hrcheck (вопросы сюда же) также указать ссылку на резюме, ожидания по ЗП и графику работы.
-
 import sqlite3
 
 from flask import Flask
@@ -18,10 +15,24 @@ app = Flask(__name__)
 
 database = DB("users.db")
 
+
 @app.route('/')
 def main_page():
     session_id = request.cookies.get('session_id')
-    return render_template('index.html', session_id=session_id)
+    if session_id:
+        key = database.get_record_by_id(session_id)
+        payload = {'access_token': key[0],
+                   'order': 'random',
+                   'fields': 'photo_50',
+                   'count': 5,
+                   'v': 5.122}
+        response = requests.get('https://api.vk.com/method/friends.get',
+                                params=payload)
+        res = response.json()
+#        return response.json()
+        return render_template('index.html', session_id=session_id, users=res["response"]["items"])
+    else:
+        return render_template('index.html', session_id=session_id)
 
 
 @app.route('/callback', methods=['GET'])
