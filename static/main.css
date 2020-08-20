@@ -9,25 +9,22 @@ html, body {
     justify-content: center;
     flex-wrap: wrap;
     height: 100%;
-    color: #16352d;
 }
 
 .button {
-    color: #2d1635;
     padding: 10px;
     margin: auto;
     width: 15em;
 }
 
 .button-text {
-    color: #c8c5c9;
     text-align: center;
 }
 
 .user {
     padding: 10px;
     max-width: 220px;
-    background:
+    color:
 }
 
 .avatar {
