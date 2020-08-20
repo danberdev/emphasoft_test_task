@@ -19,6 +19,7 @@ html, body {
 
 .button-text {
     text-align: center;
+    font-size: 18px;
 }
 
 .user {
@@ -37,5 +38,16 @@ html, body {
     padding: 10px;
     font-weight: bold;
     display: block;
+    text-align: center;
+}
+
+.header {
+    width: 100%;
+    padding: 20px;
+}
+
+.header-text {
+    font-weight: bold;
+    font-size: 25px;
     text-align: center;
 }

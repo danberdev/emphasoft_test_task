@@ -9,6 +9,17 @@
 <body>
   <div class="container">
     {% if session_id %}
+    <div class="header">
+      <span class="header-text"> Добро пожаловать! Снова. </span>
+    </div>
+    <div class="user">
+      <img class="avatar" src="{{profile.photo_200_orig}}">
+      <span class="name"> {{profile.first_name}} {{profile.last_name}}</span>
+    </div>
+    <div class="header">
+      <span class="header-text"> Вот несколько друзей с вашей страницы: </span>
+    </div>
+
     {% for user in users %}
     <div class="user">
       <img class="avatar" src="{{user.photo_200_orig}}">

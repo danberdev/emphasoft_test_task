@@ -24,15 +24,22 @@ def main_page():
                    'fields': 'photo_200_orig',
                    'count': 5,
                    'v': 5.122}
-        response = requests.get('https://api.vk.com/method/friends.get',
-                                params=payload)
-        res = response.json()
-        return render_template('index.html', session_id=session_id, users=res["response"]["items"])
+        friends = requests.get('https://api.vk.com/method/friends.get',
+                               params=payload)
+        # friends_json = friends.json()
+
+        payload = {'access_token': key[0],
+                   'fields': 'photo_200_orig',
+                   'v': 5.122}
+        profile = requests.get(
+            'https://api.vk.com/method/users.get', params=payload)
+        # ["response"])
+        return render_template('index.html', session_id=session_id, users=friends.json()["response"]["items"], profile=profile.json()["response"][0])
 
     return render_template('index.html', session_id=session_id)
 
 
-@app.route('/callback', methods=['GET'])
+@ app.route('/callback', methods=['GET'])
 def get_and_store_token():
     error = None
     if request.method == 'GET':
@@ -52,6 +59,5 @@ def get_and_store_token():
         response = make_response(redirect('/'))
         response.set_cookie('session_id', str(last_id))
         return response
-
 
     return "Ошибка! Вернитесь назад и попробуйте ещё раз."
