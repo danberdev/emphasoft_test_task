@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import sqlite3
-
 from flask import Flask
 from flask import render_template, make_response, redirect
 from flask import request
@@ -30,8 +28,8 @@ def main_page():
                                 params=payload)
         res = response.json()
         return render_template('index.html', session_id=session_id, users=res["response"]["items"])
-    else:
-        return render_template('index.html', session_id=session_id)
+
+    return render_template('index.html', session_id=session_id)
 
 
 @app.route('/callback', methods=['GET'])
@@ -55,5 +53,5 @@ def get_and_store_token():
         response.set_cookie('session_id', str(last_id))
         return response
 
-    else:
-        return "Ошибка! Вернитесь назад и попробуйте ещё раз."
+
+    return "Ошибка! Вернитесь назад и попробуйте ещё раз."
